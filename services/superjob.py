@@ -26,16 +26,16 @@ def get_superjob_statistics(language, api_superjob, town_id=4, catalogue_id=48):
         if not response.ok:
             print(f"Ошибка {response.status_code}: {response.text}")
             break
-        data = response.json()
+        vacancies_superjob = response.json()
 
-        for vacancy in data.get("objects", []):
+        for vacancy in vacancies_superjob.get("objects", []):
             total_vacancies += 1
             salary = predict_rub_salary_for_superjob(vacancy)
             if salary is not None:
                 processed_vacancies += 1
                 total_salary += salary
 
-        has_more = data.get("more", False)
+        has_more = vacancies_superjob.get("more", False)
         page += 1
 
     average_salary = (

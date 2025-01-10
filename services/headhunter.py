@@ -15,16 +15,16 @@ def get_hh_statistics(language, area=1):
     while has_more:
         params["page"] = page
         response = requests.get(base_url, params=params)
-        data = response.json()
+        vacancies_hh = response.json()
 
-        for vacancy in data.get("items", []):
+        for vacancy in vacancies_hh.get("items", []):
             total_vacancies += 1
             salary = predict_rub_salary_for_hh(vacancy.get("salary"))
             if salary is not None:
                 processed_vacancies += 1
                 total_salary += salary
 
-        has_more = page < data["pages"] - 1
+        has_more = page < vacancies_hh["pages"] - 1
         page += 1
 
     average_salary = (
