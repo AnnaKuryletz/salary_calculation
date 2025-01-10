@@ -3,11 +3,8 @@ import requests
 from utils.salary import predict_rub_salary_for_superjob
 from dotenv import load_dotenv
 
-load_dotenv()
-api_superjob = os.environ["API_SUPERJOB_APP_ID"]
 
-
-def get_superjob_statistics(language, town_id=4, catalogue_id=48):
+def get_superjob_statistics(language, api_superjob, town_id=4, catalogue_id=48):
     base_url = "https://api.superjob.ru/2.0/vacancies/"
     headers = {"X-Api-App-Id": api_superjob}
     params = {
