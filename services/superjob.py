@@ -14,11 +14,11 @@ def get_superjob_statistics(language, api_superjob, town_id=4, catalogue_id=48):
         "count": 100,
     }
 
-    total_vacancies = 0
     processed_vacancies = 0
     total_salary = 0
     page = 0
     has_more = True
+    total_vacancies = 0
 
     while has_more:
         params["page"] = page
@@ -28,8 +28,9 @@ def get_superjob_statistics(language, api_superjob, town_id=4, catalogue_id=48):
             break
         vacancies_superjob = response.json()
 
+        total_vacancies = vacancies_superjob.get("total", 0)
+
         for vacancy in vacancies_superjob.get("objects", []):
-            total_vacancies += 1
             salary = predict_rub_salary_for_superjob(vacancy)
             if salary:
                 processed_vacancies += 1
@@ -39,7 +40,7 @@ def get_superjob_statistics(language, api_superjob, town_id=4, catalogue_id=48):
         page += 1
 
     average_salary = (
-         int(total_salary / processed_vacancies) if processed_vacancies else None
+        int(total_salary / processed_vacancies) if processed_vacancies else None
     )
 
     return {
