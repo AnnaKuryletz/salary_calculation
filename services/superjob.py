@@ -23,7 +23,7 @@ def get_superjob_statistics(language, api_superjob, town_id=4, catalogue_id=48):
     while has_more:
         params["page"] = page
         response = requests.get(base_url, params=params, headers=headers)
-        if response.status_code != 200:
+        if not response.ok:
             print(f"Ошибка {response.status_code}: {response.text}")
             break
         data = response.json()
