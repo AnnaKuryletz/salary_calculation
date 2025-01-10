@@ -28,7 +28,7 @@ def get_hh_statistics(language, area=1):
         page += 1
 
     average_salary = (
-        int(total_salary / processed_vacancies) if processed_vacancies > 0 else None
+        int(total_salary / processed_vacancies) if processed_vacancies else None
     )
 
     return {

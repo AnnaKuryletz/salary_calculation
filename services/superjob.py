@@ -39,7 +39,7 @@ def get_superjob_statistics(language, api_superjob, town_id=4, catalogue_id=48):
         page += 1
 
     average_salary = (
-        int(total_salary / processed_vacancies) if processed_vacancies > 0 else None
+         int(total_salary / processed_vacancies) if processed_vacancies else None
     )
 
     return {
