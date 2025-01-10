@@ -31,7 +31,7 @@ def get_superjob_statistics(language, api_superjob, town_id=4, catalogue_id=48):
         for vacancy in vacancies_superjob.get("objects", []):
             total_vacancies += 1
             salary = predict_rub_salary_for_superjob(vacancy)
-            if salary is not None:
+            if salary:
                 processed_vacancies += 1
                 total_salary += salary
 

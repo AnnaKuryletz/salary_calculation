@@ -20,7 +20,7 @@ def get_hh_statistics(language, area=1):
         for vacancy in vacancies_hh.get("items", []):
             total_vacancies += 1
             salary = predict_rub_salary_for_hh(vacancy.get("salary"))
-            if salary is not None:
+            if salary:
                 processed_vacancies += 1
                 total_salary += salary
 
